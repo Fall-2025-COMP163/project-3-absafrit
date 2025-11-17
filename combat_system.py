@@ -395,7 +395,10 @@ def can_character_fight(character):
     Returns: True if health > 0 and not in battle
     """
     # TODO: Implement fight check
-    pass
+    if character['health'] > 0:
+        return True
+    return False
+
 
 def get_victory_rewards(enemy):
     """
@@ -403,8 +406,9 @@ def get_victory_rewards(enemy):
     
     Returns: Dictionary with 'xp' and 'gold'
     """
-    # TODO: Implement reward calculation
-    pass
+    if enemy['health'] <= 0:
+        return {'xp': enemy['xp_reward'], 'gold': enemy['gold_reward']}
+    return None
 
 def display_combat_stats(character, enemy):
     """
@@ -433,26 +437,26 @@ if __name__ == "__main__":
     print("=== COMBAT SYSTEM TEST ===")
     
     # Test enemy creation
-    # try:
-    #     goblin = create_enemy("goblin")
-    #     print(f"Created {goblin['name']}")
-    # except InvalidTargetError as e:
-    #     print(f"Invalid enemy: {e}")
+    try:
+        goblin = create_enemy("goblin")
+        print(f"Created {goblin['name']}")
+    except InvalidTargetError as e:
+        print(f"Invalid enemy: {e}")
     
     # Test battle
-    # test_char = {
-    #     'name': 'Hero',
-    #     'class': 'Warrior',
-    #     'health': 120,
-    #     'max_health': 120,
-    #     'strength': 15,
-    #     'magic': 5
-    # }
+    test_char = {
+        'name': 'Hero',
+        'class': 'Warrior',
+        'health': 120,
+        'max_health': 120,
+        'strength': 15,
+        'magic': 5
+    }
     #
     # battle = SimpleBattle(test_char, goblin)
-    # try:
-    #     result = battle.start_battle()
-    #     print(f"Battle result: {result}")
-    # except CharacterDeadError:
-    #     print("Character is dead!")
+    try:
+        result = battle.start_battle()
+        print(f"Battle result: {result}")
+    except CharacterDeadError:
+        print("Character is dead!")
 
