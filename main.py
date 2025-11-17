@@ -266,7 +266,13 @@ def explore():
     # Start combat with combat_system.SimpleBattle
     # Handle combat results (XP, gold, death)
     # Handle exceptions
-    pass
+    try:
+        combat_system.explore_and_fight(current_character)
+    except CombatError as e:
+        print(f"Combat Error: {e}")
+    except CharacterError as e:
+        print(f"Character Error: {e}")
+        handle_character_death()
 
 def shop():
     """Shop menu for buying/selling items"""
@@ -277,8 +283,11 @@ def shop():
     # Show current gold
     # Options: Buy item, Sell item, Back
     # Handle exceptions from inventory_system
-    pass
-
+    try:
+        inventory_system.shop_menu(current_character, all_items)
+    except InventoryError as e:
+        print(f"Inventory Error: {e}")
+        
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
@@ -290,7 +299,13 @@ def save_game():
     # TODO: Implement save
     # Use character_manager.save_character()
     # Handle any file I/O exceptions
-    pass
+    try:
+        character_manager.save_character(current_character)
+        print("Game saved successfully!")
+    except Exception as e:
+        print(f"Error saving game: {e}")
+    finally:
+        pass
 
 def load_game_data():
     """Load all quest and item data from files"""
@@ -301,7 +316,19 @@ def load_game_data():
     # Try to load items with game_data.load_items()
     # Handle MissingDataFileError, InvalidDataFormatError
     # If files missing, create defaults with game_data.create_default_data_files()
-    pass
+    try:
+        all_quests = game_data.load_quests()
+        all_items = game_data.load_items()
+    except MissingDataFileError as e:
+        print(f"Data file missing: {e}")
+        game_data.create_default_data_files()
+        all_quests = game_data.load_quests()
+        all_items = game_data.load_items()
+    except InvalidDataFormatError as e:
+        print(f"Data format error: {e}")
+        raise None
+    finally:
+        pass
 
 def handle_character_death():
     """Handle character death"""
@@ -309,10 +336,29 @@ def handle_character_death():
     
     # TODO: Implement death handling
     # Display death message
+    print("Your character has died!")
+
     # Offer: Revive (costs gold) or Quit
+    print("1. Revive (costs 50 gold)")
+    print("2. Quit to Main Menu")
+    choice = int(input("Enter your choice (1-2): "))
+    while choice not in [1, 2]:
+        print("Invalid choice. Please select 1 or 2.")
+        choice = int(input("Enter your choice (1-2): "))
+    if choice == 1:
+        if current_character.gold >= 50:
+            current_character.gold -= 50
+            character_manager.revive_character(current_character)
+            print("Character revived!")
+        else:
+            print("Not enough gold to revive. Returning to main menu.")
+            game_running = False
+    else:
+        print("Returning to main menu.")
+        game_running = False
+
     # If revive: use character_manager.revive_character()
     # If quit: set game_running = False
-    pass
 
 def display_welcome():
     """Display welcome message"""
