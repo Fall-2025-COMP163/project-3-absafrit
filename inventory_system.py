@@ -436,6 +436,3 @@ if __name__ == "__main__":
         print(result)
     except ItemNotFoundError:
         print("Item not found")
-
-
-
