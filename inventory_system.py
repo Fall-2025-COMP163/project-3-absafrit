@@ -2,10 +2,9 @@
 COMP 163 - Project 3: Quest Chronicles
 Inventory System Module - Starter Code
 
-Name: [Your Name Here]
+Name: Arina
 
-AI Usage: [Document any AI assistance used]
-
+AI Usage: Used AI to hep solve test cases
 This module handles inventory management, item usage, and equipment.
 """
 
