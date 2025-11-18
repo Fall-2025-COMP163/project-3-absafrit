@@ -142,9 +142,15 @@ def use_item(character, item_id, item_data):
         raise InvalidItemTypeError("Item is not consumable")
     
     # Parse effect (format: "stat_name:value" e.g., "health:20")
-    effect = item_data['effect']
-    stat_name, value = effect.split(":")
-    value = int(value)      
+    stat_name, value = parse_item_effect(item_data['effect'])
+
+    # Apply effect to character
+    apply_stat_effect(character, stat_name, value)
+
+    # Remove item from inventory
+    remove_item_from_inventory(character, item_id)
+
+    return f"Used {item_id}: {stat_name} + {value}"   
 
 def equip_weapon(character, item_id, item_data):
     """

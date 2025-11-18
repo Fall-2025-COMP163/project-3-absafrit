@@ -11,6 +11,7 @@ This module handles character creation, loading, and saving.
 
 from fileinput import filename
 import os
+import numpy
 
 from numpy import character
 from custom_exceptions import (

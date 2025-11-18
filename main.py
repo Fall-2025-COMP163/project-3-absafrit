@@ -16,7 +16,17 @@ import inventory_system
 import quest_handler
 import combat_system
 import game_data
-from custom_exceptions import *
+from custom_exceptions import (
+    InvalidCharacterClassError,
+    CharacterNotFoundError,
+    SaveFileCorruptedError,
+    InventoryError,
+    QuestError,
+    CombatError,
+    CharacterError,
+    MissingDataFileError,
+    InvalidDataFormatError
+)
 
 # ============================================================================
 # GAME STATE
