@@ -361,7 +361,6 @@ if __name__ == "__main__":
         print("Save file corrupted")
     except InvalidSaveDataError:
         print("Invalid save data")
-            - experience, gold, inventory, active_quests, completed_quests
     
     Raises: InvalidCharacterClassError if class is not valid
     """
