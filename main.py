@@ -160,21 +160,7 @@ def game_loop():
             game_running = False
         else:
             print("Invalid choice. Please select a valid option.")
-    # Execute chosen action
-    if choice == 1:
-        view_character_stats()
-    elif choice == 2:
-        view_inventory()
-    elif choice == 3:
-        quest_menu()
-    elif choice == 4:
-        explore()
-    elif choice == 5:
-        shop()
-    elif choice == 6:
-        save_game()
-        print("Game saved! Exiting to main menu.")
-        game_running = False
+
     #   Save game after each action
     save_game()
     print("Game saved!")
@@ -405,14 +391,13 @@ def main():
     # Main menu loop
     while True:
         choice = main_menu()
-    if choice == 1:
-        new_game()
-    elif choice == 2:
-        load_game()
-    elif choice == 3:
-        print("\nThanks for playing Quest Chronicles!")
-    else:
-        print("Invalid choice. Please select 1-3.")
-
+        if choice == 1:
+            new_game()
+        elif choice == 2:
+            load_game()
+        elif choice == 3:
+            print("\nThanks for playing Quest Chronicles!")
+        else:
+            print("Invalid choice. Please select 1-3.")
 if __name__ == "__main__":
     main()
