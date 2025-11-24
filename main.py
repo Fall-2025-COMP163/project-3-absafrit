@@ -405,7 +405,6 @@ def main():
     # Main menu loop
     while True:
         choice = main_menu()
-        
         if choice == 1:
             new_game()
         elif choice == 2:
