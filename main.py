@@ -405,16 +405,14 @@ def main():
     # Main menu loop
     while True:
         choice = main_menu()
-        if choice == 1:
-            new_game()
-        elif choice == 2:
-            load_game()
-        elif choice == 3:
-            print("\nThanks for playing Quest Chronicles!")
-            break
-        else:
-            print("Invalid choice. Please select 1-3.")
+    if choice == 1:
+        new_game()
+    elif choice == 2:
+        load_game()
+    elif choice == 3:
+        print("\nThanks for playing Quest Chronicles!")
+    else:
+        print("Invalid choice. Please select 1-3.")
 
 if __name__ == "__main__":
     main()
-

@@ -149,13 +149,25 @@ def load_character(character_name, save_directory="data/save_games"):
     try:
         with open(filename, 'r') as file:
             for line in file:
-                key, value = line.strip().split(': ', 1)
-                character[key.lower()] = value
+                line = line.strip()
+                if not line:  # Skip empty lines
+                    continue
+                if ':' not in line:  # Skip lines that don't have a colon
+                    continue
+                
+                # Handle both "KEY: value" and "KEY:" formats
+                if ': ' in line:
+                    key, value = line.split(': ', 1)
+                else:
+                    key, value = line.split(':', 1)
+                
+                character[key.lower()] = value.strip()  # Strip whitespace from value, but keep empty strings
     except Exception as e:
-        raise SaveFileCorruptedError(f"Save file for '{character_name}' is corrupted.") from e # Try to read file → SaveFileCorruptedError
+        raise SaveFileCorruptedError(f"{e} exists but can't be read") from e # Try to read file → SaveFileCorruptedError
 
-    if not all(key in character for key in ['name', 'class', 'level', 'health', 'max_health', 'strength', 'magic', 'experience', 'gold', 'inventory', 'active_quests', 'completed_quests']):
-        raise InvalidSaveDataError(f"Save file for '{character_name}' is invalid.") # Validate data format → InvalidSaveDataError
+    expected_keys = ['name', 'class', 'level', 'health', 'max_health', 'strength', 'magic', 'experience', 'gold', 'inventory', 'active_quests', 'completed_quests']
+    if not all(key in character for key in expected_keys):
+        raise InvalidSaveDataError(f"data format is wrong") # Validate data format → InvalidSaveDataError
 
     # Parse comma-separated lists back into Python lists
     character['inventory'] = character['inventory'].split(',') if character['inventory'] else []
@@ -360,4 +372,4 @@ if __name__ == "__main__":
     except SaveFileCorruptedError:
         print("Save file corrupted")
     except InvalidSaveDataError:
-        print("Invalid save data")
+        print("Invalid save data format")

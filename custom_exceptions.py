@@ -41,13 +41,13 @@ class QuestError(GameError):
     """Base exception for quest-related errors"""
     def __init__(self, message):
         super().__init__(message)
-        self.message = message
+        GameError.message = message
 
 class InventoryError(GameError):
     """Base exception for inventory-related errors"""
     def __init__(self, message):
         super().__init__(message)
-        self.message = message
+        GameError.message = message
 
 # ============================================================================
 # SPECIFIC EXCEPTIONS
@@ -89,7 +89,7 @@ class CharacterNotFoundError(CharacterError):
     def __init__(self, message):
         super().__init__(message)
         self.message = message
-    
+
 class CharacterDeadError(CharacterError):
     """Raised when trying to perform actions with a dead character"""
 
@@ -111,7 +111,7 @@ class InvalidTargetError(CombatError):
     def __init__(self, message):
         super().__init__(message)
         self.message = message
-    
+
 class CombatNotActiveError(CombatError):
     """Raised when trying to perform combat actions outside of battle"""
 
@@ -133,23 +133,10 @@ class QuestNotFoundError(QuestError):
     def __init__(self, message):
         super().__init__(message)
         self.message = message
-        
+
 class QuestRequirementsNotMetError(QuestError):
     """Raised when trying to start a quest without meeting requirements"""
 
-    def __init__(self, message):
-        super().__init__(message)
-        self.message = message
-
-class QuestAlreadyCompletedError(QuestError):
-    """Raised when trying to accept an already completed quest"""
-
-    def __init__(self, message):
-        super().__init__(message)
-        self.message = message
-
-class QuestNotActiveError(QuestError):
-    """Raised when trying to complete a quest that isn't active"""
     def __init__(self, message):
         super().__init__(message)
         self.message = message
@@ -188,7 +175,7 @@ class InsufficientResourcesError(InventoryError):
     def __init__(self, message):
         super().__init__(message)
         self.message = message
-    
+
 class InvalidItemTypeError(InventoryError):
     """Raised when item type is not recognized"""
     
