@@ -459,4 +459,3 @@ if __name__ == "__main__":
         print(f"Battle result: {result}")
     except CharacterDeadError:
         print("Character is dead!")
-

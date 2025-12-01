@@ -99,14 +99,17 @@ def new_game():
     try:
         current_character = character_manager.create_character(name, character_class)
         print("Character created successfully!")
+        
+        # Save character
+        character_manager.save_character(current_character)
+        print("Character saved!")
+        
+        # Start game loop
+        game_loop()
+        
     except InvalidCharacterClassError as e:
-        print(f"Error: {e}")# Handle InvalidCharacterClassError
-    # Save character
-    character_manager.save_character(current_character)
-    print("Character saved!")
-
-    # Start game loop
-    game_loop()
+        print(f"Error: {e}")
+        return
 
 def load_game():
     """
@@ -200,18 +203,18 @@ def game_menu():
 def view_character_stats():
     """Display character information"""
     global current_character
-    
     # TODO: Implement stats display
     # Show: name, class, level, health, stats, gold, etc.
     print("=== CHARACTER STATS ===")
-    print(f"Name: {current_character.name}")
-    print(f"Class: {current_character.character_class}")
-    print(f"Level: {current_character.level}")
-    print(f"Health: {current_character.health}/{current_character.max_health}")
-    print(f"Gold: {current_character.gold}")
+    print(f"Name: {current_character['name']}")
+    print(f"Class: {current_character['class']}")
+    print(f"Level: {current_character['level']}")
+    print(f"Health: {current_character['health']}/{current_character['max_health']}")
+    print(f"Gold: {current_character['gold']}")
     print("Stats:")
-    for stat, value in current_character.stats.items():
-        print(f"  {stat}: {value}")
+    for stat, value in current_character.items():
+        if stat not in ['name', 'class', 'level', 'health', 'max_health', 'experience', 'gold', 'inventory', 'active_quests', 'completed_quests']:
+            print(f"  {stat}: {value}")
         
     # Use character_manager functions
     character_manager.display_character(current_character)
@@ -397,6 +400,7 @@ def main():
             load_game()
         elif choice == 3:
             print("\nThanks for playing Quest Chronicles!")
+            break
         else:
             print("Invalid choice. Please select 1-3.")
 if __name__ == "__main__":
