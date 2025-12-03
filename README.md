@@ -4,6 +4,25 @@
 
 **AI Usage: Free Use (with explanation requirement)**
 
+Update README.md
+Document your project with:
+
+Module Architecture: Explain your module organization
+    The custom exceptions file, refers to all the exceptions that are raised in other files when an error that is identifiable occurs. Character manager allows to     you creat a character and then save the character along with leveling it up. combat system creates the enemy characters. Most importantly it allows you to         actually fight the enemy characters, try to escape the battle, use special abilities. Item inventory allows you to pull/add and un/equip items from your           inventory. It also allows you to purchase or sell items. The game data file is what allowed the user to save their progress.
+Exception Strategy: Describe when/why you raise specific exceptions
+    When looking in the inventory to retrieve an item, ItemNotFoundError populates if the item is not in your inventory. InvalidTypeError will populate if you are     trying to retrieve a type of item such as armor and you accidentally select something that is not the type. InventoryFullError is also one that allows the         program to let the user know if their bags are full. If they are, the user should have the option to sell items or use them. The final error that I think was      important was the CharacterDeadError. This allows the program to end and go back to where it was previously saved to try again. This is important, because if      your character dies in a battle, it should not be able to continue to level up or do other actions. 
+Design Choices: Justify major decisions
+    The biggest decision I had to make was what special abilities each class had. I chose the ones that made the most sense to me such as healing ability for          cleric.  
+AI Usage: Detail what AI assistance you used
+    I used AI to create the majority of the programs. VS Code made suggestions and I reviewed them before accepting. If there was something I wanted to change I       did that as I went along. I also used Google Copilot to help correct the errors that came up in pytest.
+How to Play: Instructions for running the game
+  First you select if you want to play a new game, load game, or exit
+  if you select new game you then create your character name
+  then you select your class from warrior, mage, rogue, or cleric
+  it then accesses the game menu where you can view character stats, view inventory, quest menu, explore, shop, save and quit
+  because no game has been created to be save you have to start with new game
+  I was able to get all the tests to pass, but because of several attribute errors I was unable to get the program to run completely. 
+
 ## Overview
 
 Build a complete modular RPG adventure game demonstrating mastery of **exceptions and modules**.
