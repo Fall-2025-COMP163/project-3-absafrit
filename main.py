@@ -88,11 +88,12 @@ def new_game():
     print("1. Warrior")
     print("2. Mage")
     print("3. Rogue")
-    class_choice = int(input("Enter your choice (1-3): "))
-    class_map = {1: 'Warrior', 2: 'Mage', 3: 'Rogue'}
+    print("4. Cleric")
+    class_choice = int(input("Enter your choice (1-4): "))
+    class_map = {1: 'Warrior', 2: 'Mage', 3: 'Rogue', 4: 'Cleric'}
     while class_choice not in class_map:
-        print("Invalid choice. Please select 1, 2, or 3.")
-        class_choice = int(input("Enter your choice (1-3): "))
+        print("Invalid choice. Please select 1, 2, 3 or 4.")
+        class_choice = int(input("Enter your choice (1-4): "))
     character_class = class_map[class_choice]   # Get character class from user
     # Try to create character with character_manager.create_character()
 
